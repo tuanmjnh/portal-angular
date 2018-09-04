@@ -1,0 +1,80 @@
+<form #form="ngForm">
+  <h2 mat-dialog-title>{{_services.item.group_id>0?'Cập nhật':'Thêm mới'}}</h2>
+  <mat-dialog-content class="mat-typography">
+    <div class="form-group row">
+      <mat-form-field class="col-md-6">
+        <mat-label>Số hợp đồng</mat-label>
+        <input matInput placeholder="Nhập số hợp đồng" name="contract_code" #contract_code="ngModel" required
+          [(ngModel)]="_services.item.contract_code" (keyup)="onUpdateFileUpload()">
+      </mat-form-field>
+      <mat-form-field class="col-md-6">
+        <mat-select placeholder="Loại dịch vụ" name="group_id" #group_id="ngModel" required [(ngModel)]="_services.item.group_id">
+          <mat-option *ngFor="let item of groups" [value]="item.group_id">
+            {{item.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-group row">
+      <mat-form-field class="col-md-6">
+        <mat-label>Tên khách hàng</mat-label>
+        <input matInput placeholder="Nhập tên khách hàng" name="customer_name" #customer_name="ngModel" required
+          [(ngModel)]="_services.item.customer_name">
+      </mat-form-field>
+      <mat-form-field class="col-md-6">
+        <mat-label>Mã số thuế/Mã ngân sách</mat-label>
+        <input matInput placeholder="Nhập mã số thuế/Mã ngân sách" name="tax_code" #tax_code="ngModel" required
+          [(ngModel)]="_services.item.tax_code">
+      </mat-form-field>
+    </div>
+    <div class="form-group row">
+      <mat-form-field class="col-md-12">
+        <mat-label>Địa chỉ khách hàng</mat-label>
+        <textarea matInput placeholder="Nhập địa chỉ khách hàng" name="customer_address" #customer_address="ngModel"
+          required [(ngModel)]="_services.item.customer_address"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="form-group row">
+      <mat-form-field class="col-md-6">
+        <mat-label>Số lượng dịch vụ</mat-label>
+        <input type="number" matInput placeholder="Nhập số lượng dịch vụ" name="quantity" #quantity="ngModel" required
+          [(ngModel)]="_services.item.quantity">
+      </mat-form-field>
+      <mat-form-field class="col-md-6">
+        <mat-label>Giá trị HĐ</mat-label>
+        <input type="number" matInput placeholder="Nhập giá trị HĐ" name="price" #price="ngModel" required [(ngModel)]="_services.item.price">
+        <mat-hint>Giá trị hợp đồng trước thuế</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="form-group row">
+      <mat-form-field class="col-md-6">
+        <input matInput [matDatepicker]="start_at" placeholder="Ngày ký HĐ" disabled required [value]="_services.item.start_at"
+          (dateChange)="onChangeStartAt($event)">
+        <mat-datepicker-toggle matSuffix [for]="start_at"></mat-datepicker-toggle>
+        <mat-datepicker #start_at disabled="false"></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="col-md-6">
+        <input matInput [matDatepicker]="end_at" placeholder="Ngày kết thúc HĐ" disabled (dateChange)="onChangeEndAt($event)">
+        <mat-datepicker-toggle matSuffix [for]="end_at"></mat-datepicker-toggle>
+        <mat-datepicker #end_at disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="form-group row">
+      <mat-form-field class="col-md-12">
+        <mat-label>Ghi chú</mat-label>
+        <textarea matInput placeholder="Nhập ghi chú" name="details" #details="ngModel" [(ngModel)]="_services.item.details"></textarea>
+      </mat-form-field>
+    </div>
+    <div *ngIf="_services.item.contract_code.length>0" class="form-group row">
+      <!-- <label class="col-md-6">Chọn file hợp đồng (.pdf)</label> -->
+      <app-display-files class="col-md-9" [config]="uploadConfig"></app-display-files>
+      <app-upload class="col-md-3 text-right" [config]="uploadConfig"></app-upload>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button class="mat-raised-button" mat-dialog-close>Hủy bỏ</button>
+    <button mat-button class="mat-raised-button mat-primary" [disabled]="form.invalid || uploadConfig.files.length<1"
+      cdkFocusInitial (click)="onSubmit(form)">Thực
+      hiện</button>
+  </mat-dialog-actions>
+</form>
