@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { NgForm, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { ModulesService } from '../../../shared/services/modules.service';
-import { Modules } from '../../../shared/models/modules.model';
+import { UsersService } from '../../../shared/services/users.service';
+import { Users } from '../../../shared/models/users.model';
 import * as config from '../../../shared/helpers/config';
 // import { SnackBarComponent } from '../../../shared/components/snack-bar/snack-bar.component';
 @Component({
@@ -12,7 +12,7 @@ import * as config from '../../../shared/helpers/config';
 })
 export class UpdateComponent implements OnInit {
   constructor(
-    public _services: ModulesService,
+    public _services: UsersService,
     public dialogRef: MatDialogRef<UpdateComponent>,
     // private snackBar: SnackBarComponent,
     private snackBar: MatSnackBar,
@@ -25,7 +25,7 @@ export class UpdateComponent implements OnInit {
   }
   handleSubmit(form: NgForm) {
     if (form.valid) {
-      if (this._services.item.modules_id > 0) {
+      if (this._services.item.user_id) {
         this._services.update().subscribe(
           (rs: any) => {
             if (rs.message === 'success')
@@ -40,7 +40,7 @@ export class UpdateComponent implements OnInit {
         this._services.insert().subscribe(
           (rs: any) => {
             if (rs.message === 'success') {
-              this._services.item = new Modules();
+              this._services.item = new Users();
               this.snackBar.open('Thêm mới thành công!', null, config.SNACK_BAR_SUCCESS);
             } else if (rs.message === 'exist') {
               this.snackBar.open('Key đã tồn tại!', null, config.SNACK_BAR_DANGER);

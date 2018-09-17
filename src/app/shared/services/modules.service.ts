@@ -1,13 +1,13 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ObjectToQuery } from '../helpers/common';
-import { ContractEnterprise } from '../models/contract-enterprise.model';
+import { Modules } from '../models/modules.model';
 import { AuthService } from './auth.service';
 @Injectable({ providedIn: 'root' })
-export class ContractEnterpriseService {
-  _baseUrl = this.baseUrl + 'api/ContractEnterprise';
-  items: ContractEnterprise[];
-  item: ContractEnterprise = new ContractEnterprise();
+export class ModulesService {
+  _baseUrl = this.baseUrl + 'api/modules';
+  items: Modules[];
+  item: Modules = new Modules();
   query = {
     filter: '',
     flag: 1
@@ -28,10 +28,7 @@ export class ContractEnterpriseService {
     // });
   }
   selectById(id: number) {
-    return this.http.get<ContractEnterprise>(
-      `${this._baseUrl}/${id}`,
-      this._auth.options
-    );
+    return this.http.get<Modules>(`${this._baseUrl}/${id}`, this._auth.options);
     // .subscribe((data: Services) => {
     //   this.item = data;
     // });
@@ -54,12 +51,11 @@ export class ContractEnterpriseService {
     data.forEach(i => {
       _data.push({ group_id: i.group_id, flag: i.flag });
     });
-    console.log(_data);
     return this.http.put(`${this._baseUrl}/Remove`, _data, this._auth.options);
   }
-  removeOne(model: ContractEnterprise) {
+  removeOne(model: Modules) {
     return this.http.delete(
-      `${this._baseUrl}/${model.group_id}`,
+      `${this._baseUrl}/${model.modules_id}`,
       this._auth.options
     );
   }
@@ -72,7 +68,7 @@ export class ContractEnterpriseService {
   UpdateItems() {
     return new Promise((resolve, reject) => {
       const index = this.items.findIndex(
-        x => x.group_id === this.item.group_id
+        x => x.modules_id === this.item.modules_id
       );
       this.items.splice(index, 1, this.item);
     });

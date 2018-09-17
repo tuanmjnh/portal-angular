@@ -1,25 +1,32 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { options } from '../helpers/config';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Auth, Header } from '../models/auth.model';
 import { Roles } from '../models/roles.model';
 import * as Storage from '../helpers/storage';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   _baseUrl = this.baseUrl + 'api/auth';
-  options: any = options;
+  options: any;
   item: Auth = new Auth();
   header: Header = new Header();
   roles: Roles = new Roles();
   constructor(
     private http: HttpClient,
     @Inject('BASE_URL') public baseUrl: string
-  ) {}
+  ) {
+    this.options = {
+      headers: new HttpHeaders()
+        // .set('Content-Type', 'application/json')
+        .set('Authorization', this.GetStorage(this.header.token))
+        .set('Author', this.GetStorage(this.header.user))
+        .set('Remember', this.GetRemember() ? 'true' : 'false')
+    };
+  }
   CheckToken() {
     return this.http.post(this._baseUrl + 'CheckToken', this.options);
   }
   Login() {
-    return this.http.post(this._baseUrl, this.item, this.options);
+    return this.http.post(this._baseUrl, this.item);
   }
   Logout() {
     Storage.Remove(this.header.user, this.GetRemember());
@@ -39,6 +46,12 @@ export class AuthService {
   }
   GetStorage(key: string) {
     return Storage.Get(key, this.GetRemember());
+  }
+  GetUser() {
+    return Storage.Get(this.header.user, this.GetRemember());
+  }
+  GetToken(key: string) {
+    return Storage.Get(this.header.token, this.GetRemember());
   }
   isAuth() {
     const token = this.GetStorage(this.header.token);

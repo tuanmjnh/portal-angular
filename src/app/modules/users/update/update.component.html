@@ -1,0 +1,87 @@
+<form #form="ngForm">
+  <h2 mat-dialog-title>{{_services.item.user_id?'Cập nhật':'Thêm mới'}}</h2>
+  <mat-dialog-content class="mat-typography">
+    <!-- class="mat-typography"-->
+    <div class="form-group row">
+      <!-- class="flex-columns"-->
+      <mat-form-field class="col-md-6">
+        <mat-label>Tài khoản</mat-label>
+        <input matInput placeholder="Nhập tài khoản" name="username" #username="ngModel" [(ngModel)]="_services.item.username"
+          required trim>
+        <mat-error *ngIf="username.invalid">
+          Vui lòng nhập tài khoản
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-md-6">
+        <mat-label>Tên đầy đủ</mat-label>
+        <input matInput placeholder="Nhập tên đầy đủ" name="full_name" #full_name="ngModel" [(ngModel)]="_services.item.full_name"
+          required trim>
+        <mat-error *ngIf="full_name.invalid">
+          Vui lòng nhập tên đầy đủ
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group row">
+      <mat-form-field class="col-md-6">
+        <mat-label>Mật khẩu</mat-label>
+        <input matInput placeholder="Nhập mật khẩu" name="password" #password="ngModel" [(ngModel)]="_services.item.password"
+          required trim>
+        <mat-error *ngIf="password.invalid">
+          Vui lòng nhập tên đầy đủ
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-md-6">
+        <mat-label>Xác nhận mật khẩu</mat-label>
+        <input matInput placeholder="Nhập xác nhận mật khẩu" name="repassword" #repassword="ngModel" [(ngModel)]="_services.item.repassword" required trim>
+        <mat-error *ngIf="repassword.invalid">
+          Vui lòng nhập tên đầy đủ
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group row">
+      <mat-form-field class="col-md-6">
+        <mat-label>Số điện thoại</mat-label>
+        <input matInput placeholder="Nhập số điện thoại" type="number" name="mobile" #mobile="ngModel" [(ngModel)]="_services.item.mobile" required trim>
+        <mat-error *ngIf="mobile.invalid">
+          Vui lòng nhập số điện thoại
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-md-6">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Nhập email" type="email" name="email" #email="ngModel" [(ngModel)]="_services.item.email"
+          required trim>
+          <mat-error *ngIf="mobile.invalid">
+            Vui lòng nhập email
+          </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group row">
+        <mat-form-field class="col-md-6">
+            <mat-label>Thứ tự</mat-label>
+            <input matInput placeholder="Nhập thứ tự" type="number" name="orders" #orders="ngModel" [(ngModel)]="_services.item.orders"
+              required>
+          </mat-form-field>
+          <mat-slide-toggle class="col-md-6" color="primary" name="flag" #flag="ngModel" [(ngModel)]="_services.item.flag"
+            checked="item.flag>0?true:false">
+            Sử dụng
+          </mat-slide-toggle>
+    </div>
+    <div class="form-group row">
+        <mat-form-field class="col-md-12">
+          <mat-label>Địa chỉ</mat-label>
+          <textarea matInput placeholder="Nhập địa chỉ" name="address" #address="ngModel" [(ngModel)]="_services.item.address" trim></textarea>
+        </mat-form-field>
+      </div>
+    <div class="form-group row">
+      <mat-form-field class="col-md-12">
+        <mat-label>Thông tin thêm</mat-label>
+        <textarea matInput placeholder="Nhập thông tin thêm" name="details" #details="ngModel" [(ngModel)]="_services.item.details" trim></textarea>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button class="mat-raised-button" mat-dialog-close>Hủy bỏ</button>
+    <button mat-button class="mat-raised-button mat-primary" [disabled]="form.invalid" cdkFocusInitial (click)="handleSubmit(form)">Thực
+      hiện</button>
+  </mat-dialog-actions>
+</form>

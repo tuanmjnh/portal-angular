@@ -3,7 +3,7 @@
     <mat-card-title>Đăng nhập hệ thống</mat-card-title>
     <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
     <mat-card-content>
-      <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+      <mat-spinner [style.display]="loading?'block':'none'"></mat-spinner>
       <div class="form-group row">
         <mat-form-field class="col-md-12">
           <input matInput placeholder="Tài khoản" [(ngModel)]="_services.item.username" name="username" required>

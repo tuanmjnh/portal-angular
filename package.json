@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "buildp": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -49,6 +50,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "material-design-icons": "^3.0.1",
     "moment": "^2.22.2",
+    "ng2-trim-directive": "^2.1.5",
     "popper.js": "^1.14.3",
     "protractor": "~5.4.0",
     "ts-node": "~5.0.1",

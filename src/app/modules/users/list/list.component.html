@@ -27,9 +27,9 @@
   </span> -->
 </div>
 <div class="">
-  <div class="spinner-container" *ngIf="loading===true;else dataTable">
-    <mat-spinner></mat-spinner>
-  </div>
+  <!-- <div class="spinner-container" *ngIf="loading===true;else dataTable"> -->
+    <mat-spinner [style.display]="loading ? 'block' : 'none'"></mat-spinner>
+  <!-- </div> -->
   <ng-template #dataTable>
     <!--mat-elevation-z8-->
     <table mat-table matSort [dataSource]="dataSource" class="table">
@@ -47,27 +47,27 @@
       </ng-container>
 
       <!-- Title Column -->
-      <ng-container matColumnDef="app_key">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Key</th>
-        <td mat-cell *matCellDef="let element">{{element.app_key}} </td>
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tài khoản</th>
+        <td mat-cell *matCellDef="let element">{{element.username}} </td>
       </ng-container>
 
       <!-- Icon Images -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên module</th>
-        <td mat-cell *matCellDef="let element" innerHTML="{{element.name}}"></td>
+      <ng-container matColumnDef="full_name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tên đầy đủ</th>
+        <td mat-cell *matCellDef="let element" innerHTML="{{element.full_name}}"></td>
       </ng-container>
 
       <!-- Icon Column -->
-      <ng-container matColumnDef="icons">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Icon</th>
-        <td mat-cell *matCellDef="let element" innerHTML="{{element.icons}}"></td>
+      <ng-container matColumnDef="mobile">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Điệu thoại</th>
+        <td mat-cell *matCellDef="let element" innerHTML="{{element.mobile}}"></td>
       </ng-container>
 
       <!-- Oders Column -->
-      <ng-container matColumnDef="orders">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Oders</th>
-        <td mat-cell *matCellDef="let element">{{element.orders}}</td>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+        <td mat-cell *matCellDef="let element">{{element.email}}</td>
       </ng-container>
 
       <!-- Actions Column -->

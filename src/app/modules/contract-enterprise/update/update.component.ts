@@ -7,6 +7,7 @@ import { ContractEnterprise } from '../../../shared/models/contract-enterprise.m
 import { ServicesService } from '../../../shared/services/services.service';
 import { Services } from '../../../shared/models/services.model';
 import { RemoveChars } from '../../../shared/helpers/common';
+import * as config from '../../../shared/helpers/config';
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
@@ -22,7 +23,7 @@ export class UpdateComponent implements OnInit {
     fieldName: 'fileUpload',
     controller: 'filemanager',
     renameFile: this._services.item.contract_code,
-    httpOptions: this._services.options,
+    httpOptions: this._services._auth.options,
     baseUrl: this._services.baseUrl + 'api/'
   };
   minDate: Date = new Date();
@@ -30,8 +31,7 @@ export class UpdateComponent implements OnInit {
     public _services: ContractEnterpriseService,
     public _servicesService: ServicesService,
     public dialogRef: MatDialogRef<UpdateComponent>,
-    public snackBar: MatSnackBar,
-    @Inject('SNACK_BAR_OPTIONS') private snackBarOptions
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -51,43 +51,27 @@ export class UpdateComponent implements OnInit {
         this._services.item.local_id = 1;
         if (this._services.item.contract_enterprise_id) {
           this._services.update().subscribe(
-            (res: any) => {
-              this.snackBarOptions.panelClass = [res.message];
-              this.snackBar.open(
-                'Cập nhật thành công!',
-                null,
-                this.snackBarOptions
-              );
-              this.uploadConfig.files = new Array();
+            (rs: any) => {
+              if (rs.message === 'success') {
+                this.uploadConfig.files = new Array();
+                this.snackBar.open('Cập nhật thành công!', null, config.SNACK_BAR_SUCCESS);
+              } else this.snackBar.open('Lỗi dữ liệu, vui lòng thực hiện lại!', null, config.SNACK_BAR_DANGER);
             },
             error => {
-              this.snackBarOptions.panelClass = ['danger'];
-              this.snackBar.open(
-                'Có lỗi trong quá trình xử lý, vui lòng thực hiện lại!',
-                null,
-                this.snackBarOptions
-              );
+              this.snackBar.open('Lỗi dữ liệu, vui lòng thực hiện lại!', null, config.SNACK_BAR_DANGER);
             }
           );
         } else {
           this._services.insert().subscribe(
-            (res: any) => {
-              this._services.item = new ContractEnterprise();
-              this.snackBarOptions.panelClass = [res.message];
-              this.snackBar.open(
-                'Thêm mới thành công',
-                null,
-                this.snackBarOptions
-              );
-              this.uploadConfig.files = new Array();
+            (rs: any) => {
+              if (rs.message === 'success') {
+                this._services.item = new ContractEnterprise();
+                this.uploadConfig.files = new Array();
+                this.snackBar.open('Thêm mới thành công!', null, config.SNACK_BAR_SUCCESS);
+              } else this.snackBar.open('Lỗi dữ liệu, vui lòng thực hiện lại!', null, config.SNACK_BAR_DANGER);
             },
             error => {
-              this.snackBarOptions.panelClass = ['danger'];
-              this.snackBar.open(
-                'Có lỗi trong quá trình xử lý, vui lòng thực hiện lại!',
-                null,
-                this.snackBarOptions
-              );
+              this.snackBar.open('Lỗi dữ liệu, vui lòng thực hiện lại!', null, config.SNACK_BAR_DANGER);
             }
           );
         }

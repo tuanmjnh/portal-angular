@@ -21,12 +21,12 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/assets/favicon.ico",
+              // "src/assets/favicon.ico",
               "src/assets"
             ],
             "styles": [
               // "src/styles.css"
-              "src/assets/css/styles.scss"
+              "src/scss/styles.scss"
             ],
             "scripts": []
           },

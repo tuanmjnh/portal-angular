@@ -6,6 +6,7 @@ import { ServicesService } from '../../../shared/services/services.service';
 import { Services } from '../../../shared/models/services.model';
 import { ConfirmComponent } from '../../../shared/components/confirm/confirm.component';
 import { UpdateComponent } from '../update/update.component';
+import * as config from '../../../shared/helpers/config';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -55,36 +56,28 @@ export class ListComponent implements OnInit {
   }
   handleAdd() {
     this._services.item = new Services();
-    const dialogRef = this.dialog.open(UpdateComponent, {
-      width: '80%'
-    });
-    dialogRef.afterClosed().subscribe(result => {
+    const dialogRef = this.dialog.open(UpdateComponent, config.DIALOG_OPTIONS);
+    dialogRef.afterClosed().subscribe(rs => {
       this.getData();
     });
   }
   handleEdit(item) {
     this._services.item = item;
-    const dialogRef = this.dialog.open(UpdateComponent, {
-      width: '80%'
-    });
-    dialogRef.afterClosed().subscribe(result => {
+    const dialogRef = this.dialog.open(UpdateComponent, config.DIALOG_OPTIONS);
+    dialogRef.afterClosed().subscribe(rs => {
       this.getData();
     });
   }
   handleDelete(item) {
     const dialogRef = this.dialog.open(ConfirmComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this._services.delete([item]);
-      }
+    dialogRef.afterClosed().subscribe(rs => {
+      if (rs) this._services.delete([item]);
     });
   }
   handleDeleteAll() {
     const dialogRef = this.dialog.open(ConfirmComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this._services.delete(this.selection.selected);
-      }
+    dialogRef.afterClosed().subscribe(rs => {
+      if (rs) this._services.delete(this.selection.selected);
     });
   }
   handleFlag(flag) {

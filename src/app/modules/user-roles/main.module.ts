@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../../plugins/material.module';
+import { InputTrimModule } from 'ng2-trim-directive';
 // Shared
 import { SharedModule } from '../../shared/shared.module';
 // Service
-import { ContractEnterpriseService } from '../../shared/services/contract-enterprise.service';
+// import { ModulesService } from '../../shared/services/modules.service';
 // Components
 import { MainComponent } from './main.component';
 import { ListComponent } from './list/list.component';
@@ -29,10 +30,11 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     MaterialModule,
+    InputTrimModule,
     SharedModule,
     RouterModule.forChild(routes)
   ],
-  providers: [ContractEnterpriseService],
+  // providers: [ModulesService],
   declarations: [MainComponent, ListComponent, UpdateComponent]
 })
 export class MainModule {}

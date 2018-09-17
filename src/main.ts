@@ -10,21 +10,13 @@ export function getBaseUrl() {
 const providers = [
   // { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },
   { provide: 'BASE_URL', useValue: environment.baseUrl, deps: [] },
-  {
-    provide: 'SNACK_BAR_OPTIONS',
-    useValue: {
-      duration: 2500,
-      horizontalPosition: 'end',
-      verticalPosition: 'top'
-    }
-  },
-  {
-    provide: 'DIALOG_OPTIONS',
-    useValue: {
-      // hasBackdrop: false,
-      width: '80%'
-    }
-  }
+  // {
+  //   provide: 'DIALOG_OPTIONS',
+  //   useValue: {
+  //     // hasBackdrop: false,
+  //     width: '80%'
+  //   }
+  // }
 ];
 if (environment.production) {
   enableProdMode();

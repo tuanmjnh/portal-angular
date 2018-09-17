@@ -1,0 +1,157 @@
+@import '~material-design-icons/iconfont/material-icons.css';
+@import '~@angular/material/theming';
+// @import "variables";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/grid"; // add the grid
+@import "reset";
+// Plus imports for other components in your app.
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// **Be sure that you only ever include this mixin once!**
+@include mat-core();
+// Define the default theme (same as the example above).
+$candy-app-primary: mat-palette($mat-indigo);
+$candy-app-accent : mat-palette($mat-pink, A200, A100, A400);
+$candy-app-theme : mat-light-theme($candy-app-primary, $candy-app-accent);
+// Include the default theme styles.
+@include angular-material-theme($candy-app-theme);
+// Define an alternate dark theme.
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent : mat-palette($mat-amber, A200, A100, A400);
+$dark-warn : mat-palette($mat-deep-orange);
+$dark-theme : mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+.mat-snack-bar-container {
+  &.danger {
+    background: mat-color($dark-warn);
+  }
+  &.success {
+    background: mat-color($candy-app-primary);
+  }
+  &.warning {
+    background: mat-color($dark-accent);
+  }
+}
+
+// Include the alternative theme styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
+.unicorn-dark-theme {
+  @include angular-material-theme($dark-theme);
+}
+
+a {
+  cursor: pointer;
+}
+
+.flex-spacer {
+  flex-grow: 1
+}
+
+.flex-columns {
+  display: flex;
+  flex-direction: column;
+}
+
+// Table
+.table {
+  width: 100%
+}
+
+// spinner
+.spinner-container {
+  width: 100px;
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table th.text-center button {
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  th.w-1 {
+    width: 1%;
+  }
+
+  th.w-2 {
+    width: 2%;
+  }
+
+  th.w-3 {
+    width: 3%;
+  }
+
+  th.w-4 {
+    width: 4%;
+  }
+
+  th.w-5 {
+    width: 5%;
+  }
+
+  th.w-6 {
+    width: 6%;
+  }
+
+  th.w-7 {
+    width: 7%;
+  }
+
+  th.w-8 {
+    width: 8%;
+  }
+
+  th.w-9 {
+    width: 9%;
+  }
+
+  th.w-10 {
+    width: 10%;
+  }
+
+  th.w-15 {
+    width: 15%;
+  }
+
+  th.w-20 {
+    width: 20%;
+  }
+}
+
+.pointer {
+  cursor: pointer
+}
+
+.mat-column-select {
+  overflow: initial;
+}
+
+.mat-checkbox-frame,
+.mat-checkbox-background {
+  border-radius: 0 !important;
+}
+
+button:focus {
+  outline: initial !important
+}
+
+.mat-button {
+  // padding: 3px 6px;
+  border-radius: 0 !important;
+  box-shadow: initial !important;
+}
+
+.mat-button .material-icons {
+  display: flex
+}
+
+// Float
+// Text
+.text-right {
+  text-align: right !important
+}

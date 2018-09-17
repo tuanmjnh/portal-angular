@@ -22,13 +22,69 @@ export class MaterialComponent implements OnInit {
     public authService: AuthService
   ) {
     this.navList = [
+      // {
+      //   text: 'Hệ thống',
+      //   icon: 'donut_small',
+      //   link: '',
+      //   query: '',
+      //   visable: true,
+      //   dropDown: false,
+      //   childrens: [
+      //     {
+      //       text: 'Modules',
+      //       icon: 'view_module',
+      //       link: '/modules',
+      //       query: '',
+      //       visable: true,
+      //       dropDown: true,
+      //       childrens: null
+      //     },
+      //     {
+      //       text: 'Nhóm quyền',
+      //       icon: 'work',
+      //       link: '/roles',
+      //       query: '',
+      //       visable: true,
+      //       dropDown: true,
+      //       childrens: null
+      //     }
+      //   ]
+      // },
+      // {
+      //   text: 'Người dùng',
+      //   icon: 'streetview',
+      //   link: '',
+      //   query: '',
+      //   visable: true,
+      //   dropDown: false,
+      //   childrens: [
+      //     {
+      //       text: 'Tài khoản',
+      //       icon: 'person',
+      //       link: '/users',
+      //       query: '',
+      //       visable: true,
+      //       dropDown: true,
+      //       childrens: null
+      //     },
+      //     {
+      //       text: 'Phân quyền',
+      //       icon: 'vpn_key',
+      //       link: '/user-roles',
+      //       query: '',
+      //       visable: true,
+      //       dropDown: true,
+      //       childrens: null
+      //     }
+      //   ]
+      // },
       {
-        text: 'Hợp đồng doanh nghiệp',
-        icon: 'bookmarks',
+        text: 'Doanh nghiệp',
+        icon: 'perm_contact_calendar',
         link: '',
         query: '',
         visable: true,
-        dropDown: true,
+        dropDown: false,
         childrens: [
           {
             text: 'Hợp đồng',

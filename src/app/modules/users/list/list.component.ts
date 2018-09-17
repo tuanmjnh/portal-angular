@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { MatSort, MatPaginator, MatTableDataSource, MatSnackBar } from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
-import { ContractEnterpriseService } from '../../../shared/services/contract-enterprise.service';
-import { ContractEnterprise } from '../../../shared/models/contract-enterprise.model';
 import { ConfirmComponent } from '../../../shared/components/confirm/confirm.component';
 import { UpdateComponent } from '../update/update.component';
+import { UsersService } from '../../../shared/services/users.service';
+import { Users } from '../../../shared/models/users.model';
 import * as config from '../../../shared/helpers/config';
 @Component({
   selector: 'app-list',
@@ -13,35 +13,40 @@ import * as config from '../../../shared/helpers/config';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  displayedColumns = ['select', 'contract_code', 'group_id', 'customer_name', 'start_at', 'end_at', 'actions'];
-  dataSource = new MatTableDataSource<ContractEnterprise>();
-  selection = new SelectionModel<ContractEnterprise>(true, []);
+  displayedColumns = [
+    'select',
+    'username',
+    'full_name',
+    'mobile',
+    'email',
+    'actions'
+  ];
+  dataSource = new MatTableDataSource<Users>();
+  selection = new SelectionModel<Users>(true, []);
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
   @ViewChild(MatSort)
   sort: MatSort;
   loading: boolean = false;
-  constructor(
-    public _services: ContractEnterpriseService,
-    public dialog: MatDialog,
-    public snackBar: MatSnackBar
-  ) {}
+  constructor(public _services: UsersService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.getData();
   }
   getData() {
     this.loading = true;
+    // this._services.select().the((data: any) => {
+    //   this.dataSource.data = data.data;
+    // });
     this._services.select().subscribe(
-      (res: any) => {
-        this._services.items = res.data;
+      (data: any) => {
+        this._services.items = data.data;
         this.dataSource.data = this._services.items;
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
       error => {
         console.log(error);
-        this.snackBar.open('Lỗi dữ liệu, vui lòng thực hiện lại!', null, config.SNACK_BAR_DANGER);
       },
       () => {
         this.loading = false;
@@ -49,7 +54,7 @@ export class ListComponent implements OnInit {
     );
   }
   handleAdd() {
-    this._services.item = new ContractEnterprise();
+    this._services.item = new Users();
     const dialogRef = this.dialog.open(UpdateComponent, config.DIALOG_OPTIONS);
     dialogRef.afterClosed().subscribe(rs => {
       this.getData();
@@ -65,7 +70,7 @@ export class ListComponent implements OnInit {
   handleDelete(item) {
     const dialogRef = this.dialog.open(ConfirmComponent);
     dialogRef.afterClosed().subscribe(rs => {
-      if (rs)  this._services.delete([item]);
+      if (rs) this._services.delete([item]);
     });
   }
   handleDeleteAll() {

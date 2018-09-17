@@ -18,7 +18,22 @@ const routes: Routes = [
   },
   {
     path: 'modules',
-    loadChildren: './modules/modules/modules.module#ModulesModule',
+    loadChildren: './modules/modules/main.module#MainModule',
+    data: { preload: false }
+  },
+  {
+    path: 'roles',
+    loadChildren: './modules/roles/main.module#MainModule',
+    data: { preload: false }
+  },
+  {
+    path: 'users',
+    loadChildren: './modules/users/main.module#MainModule',
+    data: { preload: false }
+  },
+  {
+    path: 'user-roles',
+    loadChildren: './modules/user-roles/main.module#MainModule',
     data: { preload: false }
   },
   {

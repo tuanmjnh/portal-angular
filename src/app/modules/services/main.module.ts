@@ -17,7 +17,8 @@ const routes: Routes = [
     path: '',
     component: MainComponent,
     children: [
-      { path: '', redirectTo: 'list', pathMatch: 'full' },
+      // { path: '', redirectTo: 'list', pathMatch: 'full' },
+      { path: '', component: ListComponent },
       { path: 'list', component: ListComponent },
       { path: 'update', component: UpdateComponent }
     ]
