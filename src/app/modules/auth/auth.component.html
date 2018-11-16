@@ -1,0 +1,29 @@
+<form #form="ngForm" class="form-signin">
+  <mat-card class="">
+    <mat-card-title>Đăng nhập hệ thống</mat-card-title>
+    <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+    <mat-card-content>
+      <mat-spinner [style.display]="loading?'block':'none'"></mat-spinner>
+      <div class="form-group row">
+        <mat-form-field class="col-md-12">
+          <input matInput placeholder="Tài khoản" [(ngModel)]="_services.item.username" name="username" required>
+        </mat-form-field>
+      </div>
+      <div class="form-group row">
+        <mat-form-field class="col-md-12">
+          <input matInput placeholder="Mật khẩu" [(ngModel)]="_services.item.password" type="password" name="password"
+            required>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-checkbox [(ngModel)]="_services.item.remember" name="remember">Ghi nhớ đăng nhập!</mat-checkbox>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      {{_services.GetStorage('auth_user')}}<br>
+      {{_services.GetStorage('auth_token')}}<br>
+      {{_services.GetStorage('auth_remember')}}
+      <button mat-raised-button (click)="onSubmit(form)" color="primary" [disabled]="form.invalid">Đăng nhập</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

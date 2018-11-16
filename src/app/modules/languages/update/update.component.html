@@ -1,0 +1,48 @@
+<form #formData="ngForm"> <!--(ngSubmit)="onInsert(formData)"-->
+  <mat-card class="example-card">
+    <mat-card-header>
+      <!-- <div mat-card-avatar class="example-header-image">
+      <i class="material-icons">view_list</i>
+    </div> -->
+      <mat-card-title style="font-size:22px">Languages</mat-card-title>
+      <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-card-content>
+      <div class="example-container">
+        <!-- <input type="hidden" name="id" #id="ngModel" [(ngModel)]="languagesService.item.id"> -->
+        <mat-form-field class="col-md-6">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Input name" name="name" #name="ngModel" [(ngModel)]="languagesService.item.name" required>
+        </mat-form-field>
+        <div class="clear-fix"></div>
+        <mat-form-field class="col-md-4">
+          <mat-label>Icon</mat-label>
+          <input matInput placeholder="Input icon" name="icon" #icon="ngModel" [(ngModel)]="languagesService.item.icon">
+        </mat-form-field>
+        <mat-form-field class="col-md-4" required>
+          <mat-label>Orders</mat-label>
+          <input matInput type="number" placeholder="Input orders" name="orders" #orders="ngModel" [(ngModel)]="languagesService.item.orders" required>
+        </mat-form-field>
+        <mat-slide-toggle name="flag" #flag="ngModel" [(ngModel)]="languagesService.item.flag" checked="languagesService.item.flag>0?true:false">Enable</mat-slide-toggle>
+        <mat-form-field class="col-md-12">
+          <mat-label>Description</mat-label>
+          <textarea matInput placeholder="Input description" name="desc" #desc="ngModel" [(ngModel)]="languagesService.item.desc"></textarea>
+        </mat-form-field>
+        <!-- <mat-form-field>
+        <mat-select placeholder="Select">
+          <mat-option value="option">Option</mat-option>
+        </mat-select>
+      </mat-form-field> -->
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="d-flex">
+      <div class="flex-spacer"></div>
+      <button mat-button color="primary" class="mat-raised-button mat-primary" type="button" (click)="onUpdate(formData)">{{id?"Update":"Add"}}</button>
+      <!-- <button mat-button color="primary" class="" [routerLink]="routerPath.update">Add</button> -->
+      <button mat-button class="mat-warn" type="button" (click)="onCancel()">Cancel</button> <!--[routerLink]="routerPath.list"-->
+      <!-- <span mat-button color="primary" class="mat-raised-button mat-primary" (click)="resetForm(formData)">Reset</span> -->
+      <!-- <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button> -->
+    </mat-card-actions>
+  </mat-card>
+</form>
